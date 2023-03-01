@@ -1,42 +1,42 @@
 'use strict';
 
-const { Model } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const User = require('./users.model');
 
 class Sale extends Model {}
 
 Sale.init({
   id: {
-    type: Sequelize.INTEGER
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
   user_id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   seller_id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   total_price: {
-    type: Sequelize.DECIMAL(9,2),
+    type: DataTypes.DECIMAL(9,2),
     allowNull: false,
   },
   delivery_address: {
-    type: Sequelize.STRING(100),
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   delivery_number: {
-    type: Sequelize.STRING(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   sale_date: {
-    type: Sequelize.DATE,
+    type: DataTypes.DATE,
     allowNull: false,
   },
   status: {
-    type: Sequelize.STRING(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
 }, {

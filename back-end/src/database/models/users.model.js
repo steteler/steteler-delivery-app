@@ -1,37 +1,37 @@
 'use strict';
 
-const { Model } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const Sale = require('./sales.model');
 
 class User extends Model {}
 
 User.init({
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
   name: {
-    type: Sequelize.STRING(100),
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   email: {
-    type: Sequelize.STRING(100),
+    type: DataTypes.STRING(100),
     allowNull: false,
     unique: true,
   },
   password: {
-    type: Sequelize.STRING(32),
+    type: DataTypes.STRING(32),
     allowNull: false,
   },
   role: {
-    type: Sequelize.STRING(20),
+    type: DataTypes.STRING(20),
     allowNull: false,
   },
 }, {
   sequelize,
   modelName: 'User',
-  tableName: 'users'
+  tableName: 'users',
   underscored: true,
   timestamps: false,
 });

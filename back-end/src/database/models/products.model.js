@@ -1,32 +1,32 @@
 'use strict';
 
-const { Model } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 class Product extends Model {}
 
 Product.init({
   id: {
-    type: Sequelize.INTEGER
+    type: DataTypes.INTEGER
     primaryKey: true,
     autoIncrement: true,
   },
   name: {
-    type: Sequelize.STRING(100),
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   price: {
-    type: Sequelize.DECIMAL(4,2),
+    type: DataTypes.DECIMAL(4,2),
     allowNull: false,
   },
   url_image:  {
-    type: Sequelize.STRING(200),
+    type: DataTypes.STRING(200),
     allowNull: false,
     defaultValue: '',
   },
 }, {
   sequelize,
   modelName: 'Product',
-  tableName: 'products'
+  tableName: 'products',
   underscored: true,
   timestamps: false,
 });

@@ -1,20 +1,20 @@
 'use strict';
 
-const { Model } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 class SaleProduct extends Model {}
 
 SaleProduct.init({
   sale_id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   product_id:{
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   quantity:{
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
 }, {
