@@ -1,19 +1,17 @@
-const User = require('../database/models/users.model');
+const { User } = require('../database/models/index');
 
-class LoginService {
-  static async getByEmail(user) {
-    // const { email, senha } = user;
+async function getByEmail({ email, password }) {
+  const userFound = await User.findOne({
+    where: { email, password },
+  });
 
-    // const userFound = await User.findOne({
-    //   where: { email, senha },
-    // });
-
-    // return userFound;
-
-    const userFound = await User.findAll();
-
-    return userFound;
+  if (!userFound) {
+    return { httpCode: 404, message: 'Not found' };
   }
+
+  return { httpCode: 200, message: userFound };
 }
 
-module.exports = LoginService;
+module.exports = {
+  getByEmail,
+};
