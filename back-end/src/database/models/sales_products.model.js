@@ -1,27 +1,22 @@
-const sequelize = require('./index');
-const { Model, DataTypes } = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  const SaleProduct = sequelize.define('SaleProduct', {
+    sale_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    product_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  }, {
+    tableName: 'sales_products',
+    underscored: true,
+    timestamps: false,
+  });
 
-class SaleProduct extends Model { }
-
-SaleProduct.init({
-  sale_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  product_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  quantity: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-}, {
-  sequelize,
-  modelName: 'SaleProduct',
-  tableName: 'sales_products',
-  underscored: true,
-  timestamps: false,
-});
-
-module.exports = SaleProduct;
+  return SaleProduct;
+}
