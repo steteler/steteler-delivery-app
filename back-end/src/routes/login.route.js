@@ -1,7 +1,8 @@
 const express = require('express');
+const LoginController = require('../controller/login.controller');
 
 const loginRouter = express.Router();
 
-loginRouter.get('/');
+loginRouter.post('/', LoginController.getByEmail);
 
 module.exports = loginRouter;

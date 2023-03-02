@@ -1,42 +1,37 @@
-'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING(32),
+      allowNull: false,
+    },
+    role: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+  }, {
+    tableName: 'users',
+    underscored: true,
+    timestamps: false,
+  });
 
-const { Model } = require('sequelize');
-const Sale = require('./sales.model');
+  User.associate = ({ Sale }) => {
+    User.hasMany(Sale, { foreignKey: 'user_id' });
+    User.hasMany(Sale, { foreignKey: 'seller_id' });
+  }
 
-class User extends Model {}
-
-User.init({
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  name: {
-    type: Sequelize.STRING(100),
-    allowNull: false,
-  },
-  email: {
-    type: Sequelize.STRING(100),
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: Sequelize.STRING(32),
-    allowNull: false,
-  },
-  role: {
-    type: Sequelize.STRING(20),
-    allowNull: false,
-  },
-}, {
-  sequelize,
-  modelName: 'User',
-  tableName: 'users'
-  underscored: true,
-  timestamps: false,
-});
-
-User.hasMany(Sale, { foreignKey: 'user_id' });
-User.hasMany(Sale, { foreignKey: 'seller_id' });
-
-module.exports = User
+  return User;
+}
