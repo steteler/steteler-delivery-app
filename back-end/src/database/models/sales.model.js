@@ -51,3 +51,5 @@ Sale.init({
   tableName: 'sales',
   modelName: 'Sale',
 });
+
+module.exports = Sale;

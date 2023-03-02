@@ -30,4 +30,6 @@ Product.init({
   timestamps: false,
 });
 
+module.exports = Product;
+
 

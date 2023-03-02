@@ -24,3 +24,4 @@ SaleProduct.init({
   timestamps: false,
 });
 
+module.exports = SaleProduct;
