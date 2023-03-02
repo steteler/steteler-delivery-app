@@ -1,9 +1,14 @@
-'use strict';
-
+const sequelize = require('./index');
 const { Model, DataTypes } = require('sequelize');
 const User = require('./users.model');
 
-class Sale extends Model {}
+
+class Sale extends Model {
+  static associate() {
+    Sale.belongsTo(User, { foreignKey: 'user_id' });
+    Sale.belongsTo(User, { foreignKey: 'seller_id' });
+  }
+}
 
 Sale.init({
   id: {
@@ -20,7 +25,7 @@ Sale.init({
     allowNull: false,
   },
   total_price: {
-    type: DataTypes.DECIMAL(9,2),
+    type: DataTypes.DECIMAL(9, 2),
     allowNull: false,
   },
   delivery_address: {
@@ -46,8 +51,3 @@ Sale.init({
   tableName: 'sales',
   modelName: 'Sale',
 });
-
-Sale.belongsTo(User, { foreignKey: 'user_id' });
-Sale.belongsTo(User, { foreignKey: 'seller_id' });
-
-module.exports = Sale;

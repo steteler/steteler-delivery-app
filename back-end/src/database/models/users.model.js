@@ -1,9 +1,13 @@
-'use strict';
-
+const sequelize = require('./index');
 const { Model, DataTypes } = require('sequelize');
 const Sale = require('./sales.model');
 
-class User extends Model {}
+class User extends Model {
+  static associate() {
+    User.hasMany(Sale, { foreignKey: 'user_id' });
+    User.hasMany(Sale, { foreignKey: 'seller_id' });
+  }
+}
 
 User.init({
   id: {
@@ -36,7 +40,4 @@ User.init({
   timestamps: false,
 });
 
-User.hasMany(Sale, { foreignKey: 'user_id' });
-User.hasMany(Sale, { foreignKey: 'seller_id' });
-
-module.exports = User
+module.exports = User;

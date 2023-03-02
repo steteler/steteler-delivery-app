@@ -1,19 +1,18 @@
-'use strict';
-
+const sequelize = require('./index');
 const { Model, DataTypes } = require('sequelize');
 
-class SaleProduct extends Model {}
+class SaleProduct extends Model { }
 
 SaleProduct.init({
   sale_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  product_id:{
+  product_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  quantity:{
+  quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
@@ -25,4 +24,3 @@ SaleProduct.init({
   timestamps: false,
 });
 
-module.exports = SaleProduct

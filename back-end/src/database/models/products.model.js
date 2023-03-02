@@ -1,12 +1,11 @@
-'use strict';
-
+const sequelize = require('./index');
 const { Model, DataTypes } = require('sequelize');
 
-class Product extends Model {}
+class Product extends Model { }
 
 Product.init({
   id: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
@@ -15,10 +14,10 @@ Product.init({
     allowNull: false,
   },
   price: {
-    type: DataTypes.DECIMAL(4,2),
+    type: DataTypes.DECIMAL(4, 2),
     allowNull: false,
   },
-  url_image:  {
+  url_image: {
     type: DataTypes.STRING(200),
     allowNull: false,
     defaultValue: '',
@@ -31,4 +30,4 @@ Product.init({
   timestamps: false,
 });
 
-module.exports = Product;
+
