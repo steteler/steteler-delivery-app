@@ -3,23 +3,30 @@ const { User } = require('../database/models');
 
 const md5Crypt = (param) => md5(param);
 
+const getRegisterNameService = async (name) => {
+  const user = await User.findOne({ where: { name } });
+  return user;
+};
+
+const getRegisterEmailService = async (name) => {
+  const user = await User.findOne({ where: { name } });
+  return user;
+};
+
 const newRegisterService = async (name, email, password, role) => {
-  const newUser = await User.create({ name, email, password: md5Crypt(password), role });
-  return newUser;
+  const verificName = getRegisterNameService(name);
+  const verificEmail = getRegisterEmailService(email);
+      
+  if (!verificName || !verificEmail) {
+    return 'Conflict';
+  }
+
+  await User.create({ name, email, password: md5Crypt(password), role });
+  return 'Create';
 };
   
-// const getRegisterNameService = async (name) => {
-//   const user = await User.findOne({ where: { name } });
-//   return user;
-// };
-
-// const getRegisterEmailService = async (name) => {
-//     const user = await User.findOne({ where: { name } });
-//     return user;
-// };
-
 module.exports = {
   newRegisterService,
-//   getRegisterNameService,
-//   getRegisterEmailService,
+  getRegisterNameService,
+  getRegisterEmailService,
 };
