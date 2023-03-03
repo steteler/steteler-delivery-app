@@ -17,8 +17,8 @@ const md5Crypt = (param) => md5(param);
 const findUser = async (name, email) => {
   const user = await User.findOne({
     where: {
-      [Op.or]: [{ name }, { email }]
-    }
+      [Op.or]: [{ name }, { email }],
+    },
   });
   return user;
 };
@@ -27,7 +27,7 @@ const newRegisterService = async (name, email, password, role) => {
   // const verificName = getRegisterNameService(name);
   // const verificEmail = getRegisterEmailService(email);
   const user = await findUser(name, email);      
-  console.log("🚀 ~ file: register.service.js:30 ~ newRegisterService ~ user:", user)
+  console.log('🚀 ~ file: register.service.js:30 ~ newRegisterService ~ user:', user);
   if (user) {
     return { type: 409, message: 'User already exists' };
   }
