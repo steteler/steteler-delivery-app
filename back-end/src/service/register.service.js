@@ -1,14 +1,10 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
 
-const md5Crypt = (toEncrypt) => {
-    const crypto = md5(toEncrypt);
-    return crypto;
-};
+const md5Crypt = (param) => md5(param);
 
 const newRegisterService = async (name, email, password, role) => {
   const newUser = await User.create({ name, email, password: md5Crypt(password), role });
-  console.log(newUser);
   return newUser;
 };
   
