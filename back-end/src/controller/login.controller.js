@@ -1,11 +1,14 @@
-const LoginService = require('../service/login.service');
+const loginService = require('../service/login.service');
 
-class LoginController {
-  static async getByEmail(req, res) {
-    const userFound = await LoginService.getByEmail(req.body);
-
-    res.status(200).json(userFound.password);
+async function getByEmail(req, res) {
+  try {
+    const { httpCode, message } = await loginService.getByEmail(req.body);
+    res.status(httpCode).json(message);
+  } catch (error) {
+    res.status(500).json();
   }
 }
 
-module.exports = LoginController;
+module.exports = {
+  getByEmail,
+};
