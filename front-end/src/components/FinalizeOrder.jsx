@@ -2,8 +2,9 @@ import React from 'react';
 
 export default function FinalizaOrder() {
   return (
-    <div>
-      <h1>Checkout</h1>
-    </div>
+    <section>
+      <h1>Finalizar Pedido</h1>
+      <section>1</section>
+    </section>
   );
 }
