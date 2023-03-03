@@ -7,12 +7,6 @@ const newRegisterController = async (req, res) => {
   if (type) return res.status(type).json({ message });
   const token = generateToken(message);
   return res.status(201).json({ ...message, token });
-  // try { 
-  //   const retorno = await newRegisterService(name, email, password, role);
-  //   return res.status(201).json(retorno);
-  // } catch (error) {
-  //   res.status(409).json(error);
-  // }
 };
 
 module.exports = {
