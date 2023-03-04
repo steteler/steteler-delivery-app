@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import registerUser from '../api/registerUser';
 
 export default function Register() {
   const [register, setRegister] = useState({
@@ -20,8 +21,10 @@ export default function Register() {
     return regex.test(email) && name.length > MIN_NAME && password.length > MIN_PASSWD;
   };
 
-  const btnHandler = () => {
+  const btnHandler = async () => {
     if (!inputValidator()) setError(true);
+    const data = await registerUser(register);
+    console.log(data);
   };
 
   return (
