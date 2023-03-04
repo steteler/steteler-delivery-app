@@ -39,14 +39,6 @@ export default function Register() {
     return regex.test(email) && name.length > MIN_NAME && password.length > MIN_PASSWD;
   };
 
-  const btnHandler = () => {
-    mutate(register);
-    // if (!error) {
-    //   console.log('ERRO');
-    //   navigate('/customer/products');
-    // }
-  };
-
   return (
     <section>
       <label htmlFor="name">
@@ -83,7 +75,7 @@ export default function Register() {
       </label>
       <button
         type="button"
-        onClick={ btnHandler }
+        onClick={ () => mutate(register) }
         disabled={ !inputValidator() }
         data-testid="common_register__button-register"
       >
