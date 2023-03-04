@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
 import registerUser from '../api/registerUser';
 
 export default function Register() {
@@ -7,24 +9,42 @@ export default function Register() {
     email: '',
     password: '',
   });
+
   const [error, setError] = useState(false);
+
+  const navigate = useNavigate();
+
+  const { mutate } = useMutation(registerUser, {
+    onSuccess: (data) => {
+      localStorage.setItem('user', JSON.stringify(data));
+      navigate('/customer/products');
+    },
+    onError: () => {
+      // An error happened!
+      setError(true);
+      console.log(error);
+    },
+  });
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setRegister((prevState) => ({ ...prevState, [name]: value }));
   };
+
   const inputValidator = () => {
     const { name, email, password } = register;
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const MIN_NAME = 12;
+    const MIN_NAME = 11;
     const MIN_PASSWD = 5;
     return regex.test(email) && name.length > MIN_NAME && password.length > MIN_PASSWD;
   };
 
-  const btnHandler = async () => {
-    if (!inputValidator()) setError(true);
-    const data = await registerUser(register);
-    console.log(data);
+  const btnHandler = () => {
+    mutate(register);
+    // if (!error) {
+    //   console.log('ERRO');
+    //   navigate('/customer/products');
+    // }
   };
 
   return (
@@ -71,7 +91,7 @@ export default function Register() {
       </button>
       { error && (
         <div data-testid="common_register__element-invalid_register">
-          ERRO
+          Usuário já existente
         </div>
       )}
     </section>
