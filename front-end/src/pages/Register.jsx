@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import postRequest from '../api/postRequest';
+import axios from 'axios';
+// import postRequest from '../api/postRequest';
 
 export default function Register() {
   const [register, setRegister] = useState({
@@ -28,7 +29,7 @@ export default function Register() {
   const btnHandler = async (e) => {
     e.preventDefault();
     try {
-      const { status, data } = await postRequest('/register', register);
+      const { status, data } = await axios.post('http://localhost:3001/register', register);
       console.log('🚀 ~ file: Register.jsx:31 ~ btnHandler ~ status:', status);
       localStorage.setItem('user', JSON.stringify(data));
       navigate('/customer/products');
