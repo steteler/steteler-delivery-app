@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
-import registerUser from '../api/registerUser';
+import postRequest from '../api/postRequest';
 
 export default function Register() {
   const [register, setRegister] = useState({
@@ -11,20 +10,7 @@ export default function Register() {
   });
 
   const [error, setError] = useState(false);
-
   const navigate = useNavigate();
-
-  const { mutate } = useMutation(registerUser, {
-    onSuccess: (data) => {
-      localStorage.setItem('user', JSON.stringify(data));
-      navigate('/customer/products');
-    },
-    onError: () => {
-      // An error happened!
-      setError(true);
-      console.log(error);
-    },
-  });
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -37,6 +23,17 @@ export default function Register() {
     const MIN_NAME = 11;
     const MIN_PASSWD = 5;
     return regex.test(email) && name.length > MIN_NAME && password.length > MIN_PASSWD;
+  };
+
+  const btnHandler = async () => {
+    try {
+      const { data } = await postRequest('/register', register);
+      localStorage.setItem('user', JSON.stringify(data));
+      navigate('/customer/products');
+    } catch (e) {
+      console.error(e);
+      setError(true);
+    }
   };
 
   return (
@@ -75,7 +72,7 @@ export default function Register() {
       </label>
       <button
         type="button"
-        onClick={ () => mutate(register) }
+        onClick={ btnHandler }
         disabled={ !inputValidator() }
         data-testid="common_register__button-register"
       >
