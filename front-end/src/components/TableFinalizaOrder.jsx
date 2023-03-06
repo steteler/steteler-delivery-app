@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 /* Nos datatestids do tbody é pra usar index e não id, verificar */
 
 export default function TableFinalizaOrder({ listItens }) {
-  const tbody = listItens.map((exp) => {
-    const { id, descricao, quantidade, valorUnit } = exp;
+  const tbody = listItens.map((item) => {
+    const { id, descricao, quantidade, valorUnit } = item;
     return (
       <tr key={ id }>
         <td

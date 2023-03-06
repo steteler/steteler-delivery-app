@@ -1,15 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TableFinalizaOrder from './TableFinalizaOrder';
 
-export default function FinalizaOrder() {
+export default function FinalizeOrder({ listItens }) {
   return (
     <section>
       <h1>Finalizar Pedido</h1>
       <section>
-        <TableFinalizaOrder />
+        <TableFinalizaOrder listItens={ listItens } />
         {' '}
         {/* Tem que enviar por props os itens que estão nesse carrinho de compras */}
       </section>
     </section>
   );
 }
+
+FinalizeOrder.propTypes = {
+  listItens: PropTypes.shape({
+    item: PropTypes.number,
+    descricao: PropTypes.string,
+    quantidade: PropTypes.number,
+    valorUnit: PropTypes.number,
+  }).isRequired,
+};
