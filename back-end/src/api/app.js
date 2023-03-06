@@ -15,4 +15,6 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/customer/products', productsRouter);
 
+app.use('/images', express.static(`${__dirname}/../images`));
+
 module.exports = app;
