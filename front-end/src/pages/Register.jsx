@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import postRequest from '../api/postRequest';
+import { useMutation } from 'react-query';
+import postRegister from '../api/postRegister';
 
 export default function Register() {
   const [register, setRegister] = useState({
@@ -11,6 +12,16 @@ export default function Register() {
 
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+
+  const { mutate } = useMutation(postRegister, {
+    onSuccess: (data) => {
+      localStorage.setItem('user', JSON.stringify(data));
+      navigate('/customer/products');
+    },
+    onError: () => {
+      setError(true);
+    },
+  });
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -25,22 +36,14 @@ export default function Register() {
     return regex.test(email) && name.length > MIN_NAME && password.length > MIN_PASSWD;
   };
 
-  const btnHandler = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const { status, data } = await postRequest('/register', register);
-      console.log('🚀 ~ file: Register.jsx:31 ~ btnHandler ~ status:', status);
-      localStorage.setItem('user', JSON.stringify(data));
-      navigate('/customer/products');
-    } catch (err) {
-      console.error(err.code);
-      setError(true);
-    }
+    mutate(register);
   };
 
   return (
     <section>
-      <form onSubmit={ (e) => btnHandler(e) }>
+      <form onSubmit={ (e) => handleSubmit(e) }>
         <label htmlFor="name">
           Nome
           <input
