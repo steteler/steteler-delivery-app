@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Falta verificar de onde vem os dados, como eles virão pra poder renderizar
+
 export default function OrderCard() {
   return (
     <section>
@@ -9,7 +11,6 @@ export default function OrderCard() {
         </div>
         <div>
           001
-
         </div>
       </div>
       <div
