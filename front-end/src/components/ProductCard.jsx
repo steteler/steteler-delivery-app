@@ -1,9 +1,9 @@
 import React from 'react';
-// import itens from '../helpers/itens';
+import PropTypes from 'prop-types';
 import CardP from './CardP';
 
-export default function ProductCard() {
-  const mapItens = itens.map((it, i) => (
+export default function ProductCard({ products }) {
+  const mapItens = products.map((it, i) => (
     <CardP key={ i } iten={ it } />
   ));
   return (
@@ -12,3 +12,14 @@ export default function ProductCard() {
     </section>
   );
 }
+
+ProductCard.propTypes = {
+  products: PropTypes.arrayOf(Object).isRequired,
+};
+
+// .shape({
+//   id: PropTypes.number,
+//   title: PropTypes.string,
+//   price: PropTypes.number,
+//   img: PropTypes.string,
+// })
