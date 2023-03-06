@@ -37,7 +37,7 @@ export default function TableFinalizaOrder({ listItens }) {
         <td>
           <button
             type="button"
-            onClick={ () => this.btnDelete(id) }
+            // onClick={ () => this.btnDelete(id) }
             data-testid={ `customer_checkout__element-order-table-remove-${id}` }
           >
             Remover
