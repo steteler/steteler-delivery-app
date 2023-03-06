@@ -11,6 +11,9 @@ export default function FinalizeOrder({ listItens }) {
         {' '}
         {/* Tem que enviar por props os itens que estão nesse carrinho de compras */}
       </section>
+      <div data-testid="customer_checkout__element-order-total-price">
+        Total: R$
+      </div>
     </section>
   );
 }

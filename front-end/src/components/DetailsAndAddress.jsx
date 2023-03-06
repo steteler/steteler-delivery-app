@@ -33,7 +33,7 @@ export default function DetailsAndAddress() {
             type="text"
             name="number"
             id="number"
-            data-testid="customer_checkout__input-address"
+            data-testid="customer_checkout__input-address-number"
             value={ number }
             // onChange={ onInputChange }
           />

@@ -7,6 +7,13 @@ export default function Checkout() {
     <section>
       <FinalizeOrder />
       <DetailsAndAddress />
+      <button
+        type="button"
+        // onClick={ () => this.btnDelete(id) }
+        data-testid="customer_checkout__button-submit-order"
+      >
+        FINALIZAR PEDIDO
+      </button>
     </section>
   );
 }
