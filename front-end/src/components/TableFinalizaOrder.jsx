@@ -58,7 +58,7 @@ export default function TableFinalizaOrder({ listItens }) {
           <th>Remover Item</th>
         </tr>
       </thead>
-      <tbody className="tbody">
+      <tbody>
         { tbody }
       </tbody>
     </table>
