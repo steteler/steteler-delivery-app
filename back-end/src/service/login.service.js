@@ -9,9 +9,9 @@ async function getByEmail(email) {
   });
 
   return userFound;
-};
+}
 
-async function login (email, password) {
+async function login(email, password) {
   const getUser = await getByEmail(email);
   if (!getUser) return { type: 404, message: 'User not found' };
 
