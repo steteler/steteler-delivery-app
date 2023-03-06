@@ -21,8 +21,8 @@ const newRegisterService = async (name, email, password) => {
   }
   const newUser = await User.create({ 
     name, email, password: md5Crypt(password), role: 'customer' });
-  const { id: _i, password: _p, ...userData } = newUser.dataValues;
-  return { type: null, message: userData };
+  // const { id: _i, password: _p, ...userData } = newUser.dataValues;
+  return { type: null, message: newUser };
 };
   
 module.exports = {
