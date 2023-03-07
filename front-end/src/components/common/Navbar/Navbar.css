@@ -1,0 +1,19 @@
+.navbar {
+  background-color: floralwhite;
+  border: 1px solid tomato;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.user-details {
+  display: flex;
+  gap: 5vw;
+  padding: 10px;
+}
+
+.options {
+  display: flex;
+  gap: 5vw;
+  padding: 10px;
+}

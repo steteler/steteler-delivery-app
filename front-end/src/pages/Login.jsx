@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import postLogin from '../api/postLogin';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function Login() {
   const [login, setLogin] = useState({ email: '', password: '' });
   const [error, setError] = useState(false);
+  const [storedValue, setValue] = useLocalStorage('user');
   const navigate = useNavigate();
 
   const handleRedirect = (role) => {
@@ -28,12 +30,12 @@ export default function Login() {
 
   const { mutate } = useMutation(postLogin, {
     onSuccess: ({ data }) => {
-      localStorage.setItem('user', JSON.stringify(data));
+      setValue(data);
       handleRedirect(data.role);
     },
     onError: () => {
-      console.error('FUDEU');
       setError(true);
+      console.warn(storedValue);
     },
   });
 
