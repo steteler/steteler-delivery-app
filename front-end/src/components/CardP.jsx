@@ -7,14 +7,14 @@ export default function CardP({ iten }) {
   return (
     <div key={ iten.id }>
       <div data-testid={ `customer_products__element-card-title-${iten.id}` }>
-        { iten.title }
+        { iten.name }
       </div>
       <div data-testid={ `customer_products__element-card-price-${iten.id}` }>
         { `R$ ${iten.price}` }
       </div>
       <img
-        src={ iten.img }
-        alt={ `Imagem de ${iten.title}` }
+        src={ iten.url_image }
+        alt={ `Imagem de ${iten.name}` }
         data-testid={ `customer_products__img-card-bg-image-${iten.id}` }
       />
       <button
@@ -43,8 +43,8 @@ export default function CardP({ iten }) {
 CardP.propTypes = {
   iten: PropTypes.shape({
     id: PropTypes.number,
-    title: PropTypes.string,
+    name: PropTypes.string,
     price: PropTypes.number,
-    img: PropTypes.string,
+    url_image: PropTypes.string,
   }).isRequired,
 };
