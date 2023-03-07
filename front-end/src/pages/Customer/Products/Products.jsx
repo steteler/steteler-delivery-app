@@ -7,8 +7,7 @@ export default function Products() {
 
   const getAllProducts = async () => {
     const allProducts = await getProducts();
-    console.log(allProducts);
-    return setProducts(allProducts);
+    return setProducts(allProducts.data);
   };
 
   useEffect(() => {

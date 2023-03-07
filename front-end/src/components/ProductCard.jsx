@@ -15,10 +15,10 @@ export default function ProductCard({ products }) {
 
 ProductCard.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    url_image: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.string,
+    url_image: PropTypes.string,
   })).isRequired,
 };
 

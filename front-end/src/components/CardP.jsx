@@ -10,7 +10,7 @@ export default function CardP({ iten }) {
         { iten.name }
       </div>
       <div data-testid={ `customer_products__element-card-price-${iten.id}` }>
-        { `R$ ${iten.price}` }
+        { iten.price.replace(/\./, ',') }
       </div>
       <img
         src={ iten.url_image }
@@ -44,7 +44,7 @@ CardP.propTypes = {
   iten: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     url_image: PropTypes.string,
   }).isRequired,
 };
