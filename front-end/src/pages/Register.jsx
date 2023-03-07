@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import postRegister from '../api/postRegister';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function Register() {
   const [register, setRegister] = useState({
@@ -10,16 +11,19 @@ export default function Register() {
     password: '',
   });
 
+  const [storedValue, setValue] = useLocalStorage('user');
+
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   const { mutate } = useMutation(postRegister, {
-    onSuccess: (data) => {
-      localStorage.setItem('user', JSON.stringify(data));
+    onSuccess: ({ data }) => {
+      setValue(data);
       navigate('/customer/products');
     },
     onError: () => {
       setError(true);
+      console.warn(storedValue);
     },
   });
 
