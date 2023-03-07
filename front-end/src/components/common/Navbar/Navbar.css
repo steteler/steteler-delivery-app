@@ -13,6 +13,7 @@
 }
 
 .options {
+  border: 1px solid tomato;
   display: flex;
   gap: 5vw;
   padding: 10px;
