@@ -21,10 +21,3 @@ ProductCard.propTypes = {
     url_image: PropTypes.string,
   })).isRequired,
 };
-
-// .shape({
-//   id: PropTypes.number,
-//   title: PropTypes.string,
-//   price: PropTypes.number,
-//   img: PropTypes.string,
-// })

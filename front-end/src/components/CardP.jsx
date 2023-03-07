@@ -4,6 +4,17 @@ import PropTypes from 'prop-types';
 export default function CardP({ iten }) {
   const [quantity, setQuantity] = useState(0);
 
+  const subtractQuant = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleChange = ({ target }) => {
+    const { value } = target;
+    setQuantity({ quantity: value });
+  };
+
   return (
     <div key={ iten.id }>
       <div data-testid={ `customer_products__element-card-title-${iten.id}` }>
@@ -27,7 +38,7 @@ export default function CardP({ iten }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-rm-item-${iten.id}` }
-        onClick={ () => setQuantity(quantity - 1) }
+        onClick={ () => subtractQuant() }
       >
         -
       </button>
@@ -35,6 +46,7 @@ export default function CardP({ iten }) {
         type="number"
         value={ quantity }
         data-testid={ `customer_products__input-card-quantity-${iten.id}` }
+        onChange={ () => handleChange() }
       />
     </div>
   );
