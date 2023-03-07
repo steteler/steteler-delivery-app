@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import getProducts from '../../../api/getProducts';
 import ProductCard from '../../../components/ProductCard';
 import DeliveryContext from '../../../context/DeliveryContext';
+import Navbar from '../../../components/common/Navbar';
 
 export default function Products() {
   const { totalProductsInCart } = useContext(DeliveryContext);
@@ -23,6 +24,7 @@ export default function Products() {
 
   return (
     <div>
+      <Navbar />
       <h1>Products</h1>
       <ProductCard products={ products } />
       <Link to="/customer/checkout">
