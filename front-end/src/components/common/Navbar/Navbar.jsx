@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../hooks/useLocalStorage';
+import CustomerNavOptions from '../CustomerNavOptions';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -14,22 +15,19 @@ export default function Navbar() {
   };
   return (
     <nav className="navbar">
-      <h3 data-testid="customer_products__element-navbar-link-products">
-        PRODUTOS
-      </h3>
-      <h3 data-testid="customer_products__element-navbar-link-orders">
-        MEUS PEDIDOS
-      </h3>
-      <h2 data-testid="customer_products__element-navbar-user-full-name">
-        {storedValue.name}
-      </h2>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-logout"
-        onClick={ btnHandler }
-      >
-        Sair
-      </button>
+      <CustomerNavOptions />
+      <div className="user-details">
+        <h2 data-testid="customer_products__element-navbar-user-full-name">
+          {storedValue.name}
+        </h2>
+        <button
+          type="button"
+          data-testid="customer_products__element-navbar-link-logout"
+          onClick={ btnHandler }
+        >
+          Sair
+        </button>
+      </div>
 
     </nav>
   );
