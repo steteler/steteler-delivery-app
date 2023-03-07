@@ -3,8 +3,6 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
 const secret = fs.readFileSync('./jwt.evaluation.key', 'utf8') || 'secret_key';
-console.log("🚀 ~ file: JWTUtils.js:6 ~ secret:", secret)
-
 
 const generateToken = (data) => jwt.sign(
   { data },
