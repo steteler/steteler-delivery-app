@@ -3,7 +3,7 @@ const cors = require('cors');
 
 const loginRouter = require('../routes/login.route');
 const registerRouter = require('../routes/register.route');
-const productsRouter = require('../routes/products.route');
+const productsRouter = require('../routes/customer/products.route');
 
 const app = express();
 
