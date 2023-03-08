@@ -18,9 +18,9 @@ const newUser = async (name, email, password) => {
   if (user) {
     return { type: 409, message: 'User already exists' };
   }
-  const newUser = await User.create({ 
+  const addUser = await User.create({ 
     name, email, password: md5Crypt(password), role: 'customer' });
-  const { id: _i, password: _p, ...userData } = newUser.dataValues;
+  const { id: _i, password: _p, ...userData } = addUser.dataValues;
   return { type: null, message: userData };
 };
 
