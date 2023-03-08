@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from 'react-query';
-import postRegister from '../../api/postRegister';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import postAdminRegister from '../../api/postAdminRegister';
 import Navbar from '../../components/common/Navbar/Navbar';
 
 export default function Management() {
@@ -8,11 +9,12 @@ export default function Management() {
     name: '',
     email: '',
     password: '',
-    role: 'cliente',
+    role: 'customer',
   });
   const [error, setError] = useState(false);
+  const [storedValue] = useLocalStorage('user');
 
-  const { mutate } = useMutation(postRegister, {
+  const { mutate } = useMutation(postAdminRegister, {
     onSuccess: ({ data }) => {
       setValue(data);
     },
@@ -36,15 +38,15 @@ export default function Management() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate(register);
-    console.warn(register);
+    const { token } = storedValue;
+    mutate({ register, token });
   };
   return (
     <section>
       <Navbar />
       { error && (
         <div data-testid="admin_manage__element-invalid-register">
-          DEU ERRO MENOR
+          ERRO
         </div>
       )}
       <form onSubmit={ (e) => handleSubmit(e) }>
@@ -88,9 +90,9 @@ export default function Management() {
             id="role-input"
             onChange={ handleChange }
           >
-            <option value="vendedor">Vendedor</option>
-            <option value="administrador">Administrador</option>
-            <option value="cliente">Cliente</option>
+            <option value="seller">Vendedor</option>
+            <option value="administrator">Administrador</option>
+            <option value="customer">Cliente</option>
           </select>
         </label>
         <button
