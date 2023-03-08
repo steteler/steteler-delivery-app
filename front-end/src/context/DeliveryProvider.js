@@ -5,8 +5,11 @@ import DeliveryContext from './DeliveryContext';
 export default function DeliveryProvider({ children }) {
   const [totalProductsInCart, setTotalProductsInCart] = useState([]);
 
-  useMemo(() => (
-    { totalProductsInCart, setTotalProductsInCart }), [totalProductsInCart]);
+  const context = useMemo(
+    () => (
+      { totalProductsInCart, setTotalProductsInCart }),
+    [totalProductsInCart, setTotalProductsInCart],
+  );
 
   return (
     <DeliveryContext.Provider value={ context }>
