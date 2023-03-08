@@ -23,7 +23,17 @@ const newRegisterService = async (name, email, password) => {
   const { id: _i, password: _p, ...userData } = newUser.dataValues;
   return { type: null, message: userData };
 };
+
+const adminRegister = async (name, email, password, role) => {
+  const user = await findUser(name, email);      
+  if (user) {
+    return { type: 409, message: 'User already exists' };
+  }
+  await User.create({ name, email, password: md5Crypt(password), role });
+  return { type: null, message: 'Success' };
+};
   
 module.exports = {
   newRegisterService,
+  adminRegister,
 };
