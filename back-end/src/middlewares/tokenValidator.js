@@ -6,11 +6,11 @@ const tokenValidator = (req, res, next) => {
   try {
     const { data: { role } } = validateToken(token);
     console.warn(role);
-    if(role !== 'administrator') return res.status(401).json({ message: 'Unauthorized' });
+    if (role !== 'administrator') return res.status(401).json({ message: 'Unauthorized' });
     next();
   } catch (err) {
    return res.status(401).json({ message: 'Expired or invalid token' });
   }
-}
+};
 
 module.exports = tokenValidator;
