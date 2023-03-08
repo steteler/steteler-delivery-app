@@ -13,7 +13,7 @@ const findUser = async (name, email) => {
   return user;
 };
 
-const newRegisterService = async (name, email, password) => {
+const newUser = async (name, email, password) => {
   const user = await findUser(name, email);      
   if (user) {
     return { type: 409, message: 'User already exists' };
@@ -24,7 +24,7 @@ const newRegisterService = async (name, email, password) => {
   return { type: null, message: userData };
 };
 
-const adminRegister = async (name, email, password, role) => {
+const newUserByAdmin = async (name, email, password, role) => {
   const user = await findUser(name, email);      
   if (user) {
     return { type: 409, message: 'User already exists' };
@@ -34,6 +34,6 @@ const adminRegister = async (name, email, password, role) => {
 };
   
 module.exports = {
-  newRegisterService,
-  adminRegister,
+  newUser,
+  newUserByAdmin,
 };
