@@ -1,19 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState /* useContext */ } from 'react';
 import PropTypes from 'prop-types';
+// import DeliveryContext from '../context/DeliveryContext';
 
 export default function CardP({ iten }) {
+  // const { totalProductsInCart, setTotalProductsInCart } = useContext(DeliveryContext);
   const [quantity, setQuantity] = useState(0);
 
-  const subtractQuant = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-  };
+  // const updatedProducts = () => {
+  //   const productUpdated = totalProductsInCart.map((product) => {
+  //     if (product.id === iten.id) {
+  //       return { ...product, quantity };
+  //     }
+  //     return product;
+  //   });
+  //   return setTotalProductsInCart(productUpdated);
+  // };
 
-  const handleChange = ({ target }) => {
-    const { value } = target;
-    setQuantity({ quantity: value });
-  };
+  // const sumQuant = () => {
+  //   setQuantity(quantity + 1);
+  //   if (totalProductsInCart.some((product) => product.id === iten.id)) {
+  //     return updatedProducts();
+  //   }
+  //   const updatedArray = [
+  //     ...totalProductsInCart,
+  //     { id: iten.id, name: iten.name, price: iten.price, quantity }];
+  //   setTotalProductsInCart(updatedArray);
+  // };
+
+  // const subtractQuant = () => {
+  //   if (quantity > 0) {
+  //     setQuantity(quantity - 1);
+  //   }
+  //   if (totalProductsInCart.some((product) => product.id === iten.id)) {
+  //     return updatedProducts();
+  //   }
+  //   const updatedArray = [
+  //     ...totalProductsInCart,
+  //     { id: iten.id, name: iten.name, price: iten.price, quantity }];
+  //   setTotalProductsInCart(updatedArray);
+  // };
 
   return (
     <div key={ iten.id }>
@@ -21,17 +46,19 @@ export default function CardP({ iten }) {
         { iten.name }
       </div>
       <div data-testid={ `customer_products__element-card-price-${iten.id}` }>
-        { iten.price.replace(/\./, ',') }
+        { `R$ ${iten.price.replace(/\./, ',')}` }
       </div>
       <img
         src={ iten.url_image }
         alt={ `Imagem de ${iten.name}` }
         data-testid={ `customer_products__img-card-bg-image-${iten.id}` }
+        width="80px"
+        height="100px"
       />
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${iten.id}` }
-        onClick={ () => setQuantity(quantity + 1) }
+        onClick={ () => sumQuant() }
       >
         +
       </button>
@@ -46,7 +73,7 @@ export default function CardP({ iten }) {
         type="number"
         value={ quantity }
         data-testid={ `customer_products__input-card-quantity-${iten.id}` }
-        onChange={ () => handleChange() }
+        onChange={ (event) => { setQuantity(event.target.value); } }
       />
     </div>
   );
