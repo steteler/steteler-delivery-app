@@ -15,7 +15,6 @@ export default function Routing() {
       <Route path="/customer/products" element={ <Products /> } />
       <Route path="/customer/checkout" element={ <Checkout /> } />
       <Route path="/admin/manage" element={ <Management /> } />
-      <Route path="/customer/checkout" element={ <Checkout /> } />
     </Routes>
   );
 }

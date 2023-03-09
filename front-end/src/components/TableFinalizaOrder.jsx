@@ -66,10 +66,10 @@ export default function TableFinalizaOrder({ listItens }) {
 }
 
 TableFinalizaOrder.propTypes = {
-  listItens: PropTypes.shape({
+  listItens: PropTypes.arrayOf(PropTypes.shape({
     item: PropTypes.number,
     descricao: PropTypes.string,
     quantidade: PropTypes.number,
     valorUnit: PropTypes.number,
-  }).isRequired,
+  })).isRequired,
 };
