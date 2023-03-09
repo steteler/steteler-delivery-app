@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import DeliveryContext from '../context/DeliveryContext';
+import DeliveryContext from '../../context/DeliveryContext';
 
 export default function CardP({ iten }) {
   const { totalProductsInCart, setTotalProductsInCart } = useContext(DeliveryContext);
@@ -16,8 +16,10 @@ export default function CardP({ iten }) {
       totalIten: (Number(iten.price) * q).toFixed(2),
     };
     const filterProducts = totalProductsInCart.filter((p) => iten.id !== p.id);
-    const updatedItems = [...filterProducts, updatedItem];
-    setTotalProductsInCart(updatedItems);
+    if (q > 0) {
+      const updatedItems = [...filterProducts, updatedItem];
+      setTotalProductsInCart(updatedItems);
+    }
   };
 
   // const changeManual = (value) => {

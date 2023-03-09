@@ -7,14 +7,13 @@ export default function DetailsAndAddress() {
       <form>
         <label htmlFor="winner">
           P.Vendedora Responsável:
-          <input
-            type="text"
+          <select
             name="cardWinner"
             id="winner"
             data-testid="customer_checkout__select-seller"
-            value={ cardWinner }
-            // onChange={ onInputChange }
-          />
+          >
+            <option value="test">test</option>
+          </select>
         </label>
         <label htmlFor="address">
           Endereço:
@@ -23,7 +22,7 @@ export default function DetailsAndAddress() {
             name="address"
             id="address"
             data-testid="customer_checkout__input-address"
-            value={ address }
+            // value={ address }
             // onChange={ onInputChange }
           />
         </label>
@@ -34,7 +33,7 @@ export default function DetailsAndAddress() {
             name="number"
             id="number"
             data-testid="customer_checkout__input-address-number"
-            value={ number }
+            // value={ number }
             // onChange={ onInputChange }
           />
         </label>
