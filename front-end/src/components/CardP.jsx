@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import DeliveryContext from '../context/DeliveryContext';
 
@@ -16,48 +16,58 @@ export default function CardP({ iten }) {
       totalIten: (Number(iten.price) * q).toFixed(2),
     };
     const filterProducts = totalProductsInCart.filter((p) => iten.id !== p.id);
-    const updatedItems = [
-      ...filterProducts,
-      updatedItem,
-    ];
+    const updatedItems = [...filterProducts, updatedItem];
     setTotalProductsInCart(updatedItems);
   };
 
-  const subtractQuant = () => {
+  // const changeManual = (value) => {
+  //   if (value === 0) {
+  //     const itens = [...totalProductsInCart];
+  //     delete itens[iten.id];
+  //     return setTotalProductsInCart(itens);
+  //   }
+  //   const updatedItem = {
+  //     id: iten.id,
+  //     name: iten.name,
+  //     price: iten.price,
+  //     url_image: iten.url_image,
+  //     quantity: Number(value),
+  //     totalIten: (Number(iten.price) * Number(value)).toFixed(2),
+  //   };
+  //   const filterProducts = totalProductsInCart.filter((p) => iten.id !== p.id);
+  //   const updatedItems = [
+  //     ...filterProducts,
+  //     updatedItem,
+  //   ];
+  //   setTotalProductsInCart(updatedItems);
+  // };
+
+  useEffect(() => {
+    console.log(quantity);
+    changeQuant(quantity);
+  }, [quantity]);
+
+  const handleChange = (event) => {
+    setQuantity(event.target.value);
+  };
+
+  const handleIncrement = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecrement = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
     }
   };
 
-  const changeManual = (value) => {
-    if (value === 0) {
-      const itens = [...totalProductsInCart];
-      delete itens[iten.id];
-      return setTotalProductsInCart(itens);
-    }
-    const updatedItem = {
-      id: iten.id,
-      name: iten.name,
-      price: iten.price,
-      url_image: iten.url_image,
-      quantity: Number(value),
-      totalIten: (Number(iten.price) * Number(value)).toFixed(2),
-    };
-    const filterProducts = totalProductsInCart.filter((p) => iten.id !== p.id);
-    const updatedItems = [
-      ...filterProducts,
-      updatedItem,
-    ];
-    setTotalProductsInCart(updatedItems);
-  };
-
   return (
-    <div key={ iten.id }>
+    <div key={ iten.id } style={ { border: '1px solid tomato' } }>
       <div data-testid={ `customer_products__element-card-title-${iten.id}` }>
-        { iten.name }
+        {iten.name}
       </div>
       <div data-testid={ `customer_products__element-card-price-${iten.id}` }>
-        { `R$ ${iten.price.replace(/\./, ',')}` }
+        {`R$ ${iten.price.replace(/\./, ',')}`}
       </div>
       <img
         src={ iten.url_image }
@@ -69,14 +79,14 @@ export default function CardP({ iten }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${iten.id}` }
-        onClick={ () => { setQuantity(quantity + 1); changeQuant(quantity + 1); } }
+        onClick={ handleIncrement }
       >
         +
       </button>
       <button
         type="button"
         data-testid={ `customer_products__button-card-rm-item-${iten.id}` }
-        onClick={ () => { subtractQuant(); changeQuant(quantity + 1); } }
+        onClick={ handleDecrement }
       >
         -
       </button>
@@ -85,10 +95,7 @@ export default function CardP({ iten }) {
         value={ quantity }
         min="0"
         data-testid={ `customer_products__input-card-quantity-${iten.id}` }
-        onChange={ (event) => {
-          changeManual(event.target.value);
-          setQuantity(event.target.value);
-        } }
+        onChange={ (e) => handleChange(e) }
       />
     </div>
   );
