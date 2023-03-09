@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import getOrders from '../../api/Seller/getOrders';
-// import OrdersCard from '../../components/Seller/OrdersCard';
+import React from 'react';
+import PropTypes from 'prop-types';
+import CardOrders from './CardOrders';
 
-export default function Orders() {
-  const [orders, setOrders] = useState([]);
-
-  const getAllOrders = async () => {
-    const allOrders = await getOrders();
-    console.log(allOrders.data);
-    return setOrders(allOrders.data);
-  };
-
-  useEffect(() => {
-    getAllOrders();
-  }, []);
-
+export default function OrdersCard({ orders }) {
+  const mapItens = orders.map((it, i) => (
+    <CardOrders key={ i } iten={ it } />
+  ));
   return (
-    <div>
-      <h1>Página do vendedor</h1>
-      <button type="button" onClick={ () => getAllOrders() }>clique</button>
-      <button type="button" onClick={ () => console.log(orders) }>orders</button>
-      {/* <OrdersCard orders={ orders } /> */}
-    </div>
+    <section>
+      { mapItens }
+    </section>
   );
 }
+OrdersCard.propTypes = {
+  orders: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    total_price: PropTypes.number,
+    delivery_address: PropTypes.string,
+    delivery_number: PropTypes.string,
+    sale_date: PropTypes.instanceOf(Date),
+    status: PropTypes.string,
+  })).isRequired,
+};
