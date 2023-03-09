@@ -7,7 +7,6 @@ import DeliveryContext from '../../../context/DeliveryContext';
 export default function Products() {
   const { totalProductsInCart } = useContext(DeliveryContext);
   const [products, setProducts] = useState([]);
-
   const getAllProducts = async () => {
     const allProducts = await getProducts();
     return setProducts(allProducts.data);
@@ -16,9 +15,6 @@ export default function Products() {
   useEffect(() => {
     getAllProducts();
   }, []);
-
-  console.log(totalProductsInCart.map((i) => i.totalIten));
-  console.log(totalProductsInCart.map((i) => i.quantity));
 
   const total = totalProductsInCart.map((i) => i.totalIten)
     .reduce((acc, currValue) => acc + Number(currValue), 0);
@@ -35,8 +31,10 @@ export default function Products() {
           disabled={ isDisabled }
           data-testid="customer_products__button-cart"
         >
-          <div data-testid="customer_products__checkout-bottom-value" />
-          { `Ver Carrinho: R$ ${total.toFixed(2).replace(/\./, ',')}` }
+          Ver Carrinho: R$
+          <span data-testid="customer_products__checkout-bottom-value">
+            { `${total.toFixed(2).toString().replace('.', ',')}` }
+          </span>
         </button>
       </Link>
     </div>
