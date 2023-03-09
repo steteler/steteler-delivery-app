@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Products from '../pages/Customer/Products/Products';
+import Checkout from '../pages/Checkout';
 import Management from '../pages/Admin/Management';
 
 export default function Routing() {
@@ -12,6 +13,7 @@ export default function Routing() {
       <Route path="/login" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="/customer/products" element={ <Products /> } />
+      <Route path="/customer/checkout" element={ <Checkout /> } />
       <Route path="/admin/manage" element={ <Management /> } />
     </Routes>
   );
