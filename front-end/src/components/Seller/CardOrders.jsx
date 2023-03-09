@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function CardOrders({ iten }) {
   return (
     <div key={ iten.id }>
-      <Link to="/seller/orders/">
+      <Link to={ `/seller/orders/${iten.id}` }>
         <div data-testid={ `seller_orders__element-order-id-${iten.id}` }>
           { iten.id }
         </div>
