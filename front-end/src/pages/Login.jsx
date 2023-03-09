@@ -19,7 +19,7 @@ export default function Login() {
       navigate('/seller/orders');
       break;
     case 'customer':
-      console.log('CUSTOMER');
+      // console.log('CUSTOMER');
       navigate('/customer/products');
       break;
 

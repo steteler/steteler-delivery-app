@@ -1,19 +1,29 @@
-import React from 'react';
-import DetailsAndAddress from '../components/DetailsAndAddress';
-import FinalizeOrder from '../components/FinalizeOrder';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import DetailsAndAddress from '../components/checkout/DetailsAndAddress';
+import FinalizeOrder from '../components/checkout/FinalizeOrder';
+import DeliveryContext from '../context/DeliveryContext';
 
 export default function Checkout() {
+  const { totalProductsInCart, setTotalProductsInCart } = useContext(DeliveryContext);
+
+  const finalizeOrder = () => {
+    setTotalProductsInCart([]);
+  };
+
   return (
     <section>
-      <FinalizeOrder />
+      <FinalizeOrder listItens={ totalProductsInCart } />
       <DetailsAndAddress />
-      <button
-        type="button"
-        // onClick={ () => this.btnDelete(id) }
-        data-testid="customer_checkout__button-submit-order"
-      >
-        FINALIZAR PEDIDO
-      </button>
+      <Link to="/register">
+        <button
+          type="button"
+          onClick={ finalizeOrder }
+          data-testid="customer_checkout__button-submit-order"
+        >
+          FINALIZAR PEDIDO
+        </button>
+      </Link>
     </section>
   );
 }

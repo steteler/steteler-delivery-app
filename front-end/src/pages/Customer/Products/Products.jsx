@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import getProducts from '../../../api/getProducts';
-import ProductCard from '../../../components/ProductCard';
+import ProductCard from '../../../components/product/ProductCard';
 import DeliveryContext from '../../../context/DeliveryContext';
 import Navbar from '../../../components/common/Navbar/Navbar';
 
 export default function Products() {
   const { totalProductsInCart } = useContext(DeliveryContext);
   const [products, setProducts] = useState([]);
+
   const getAllProducts = async () => {
     const allProducts = await getProducts();
     return setProducts(allProducts.data);
@@ -16,6 +17,8 @@ export default function Products() {
   useEffect(() => {
     getAllProducts();
   }, []);
+
+  console.log(totalProductsInCart);
 
   const total = totalProductsInCart.map((i) => i.totalIten)
     .reduce((acc, currValue) => acc + Number(currValue), 0);
