@@ -5,7 +5,6 @@ import Login from '../pages/Login';
 import Products from '../pages/Customer/Products/Products';
 import Checkout from '../pages/Checkout';
 import Management from '../pages/Admin/Management';
-import Checkout from '../pages/Checkout';
 
 export default function Routing() {
   return (
