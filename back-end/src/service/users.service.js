@@ -6,5 +6,5 @@ const findAllUserService = async () => {
 };
 
 module.exports = {
-  findAllUserService
+  findAllUserService,
 };
