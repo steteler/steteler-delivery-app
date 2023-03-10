@@ -5,11 +5,9 @@ const findAllSalesService = async () => {
   return sales;
 };
 
-const newSaleService = async () => {
-
-};
+const newSaleService = async () => {};
 
 module.exports = {
   findAllSalesService,
-  newSaleService
+  newSaleService,
 };
