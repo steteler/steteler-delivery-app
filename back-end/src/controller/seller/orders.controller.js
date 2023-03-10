@@ -10,22 +10,14 @@ const findAllSalesController = async (req, res) => {
 };
 
 const newSaleController = async (req, res) => {
-  const token = req.headers.authorization;
-  if (!token) {
-    return res.status(401).send({ message: 'Token not found' });
-  }
-  validateToken(token);
-  const { totalPrice, deliveryAddress, deliveryNumber, productsId, quantity } = req.body;
+  console.log('aqui');
+  const { email, seller, address, number, total, productsIds, quantity } = req.body;
   const { type, message } = await newSaleService(
-    totalPrice,
-    deliveryAddress,
-    deliveryNumber,
-    productsId,
-    quantity,
+    email, seller, address, number, total, productsIds, quantity
   );
   if (type) return res.status(type).json({ message });
 
-  return res.status(201).json({ ...message, token });
+  return res.status(201).json({ message });
 };
 
 module.exports = {
