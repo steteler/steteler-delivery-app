@@ -12,6 +12,7 @@ export default function Register() {
   });
 
   const [storedValue, setValue] = useLocalStorage('user');
+  console.log(storedValue);
 
   const [error, setError] = useState(false);
   const navigate = useNavigate();

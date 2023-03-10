@@ -6,6 +6,11 @@ import DeliveryContext from '../context/DeliveryContext';
 
 export default function Checkout() {
   const { totalProductsInCart, setTotalProductsInCart } = useContext(DeliveryContext);
+  // const { detailsAddress, setTotalDetailsAddress } = useContext(DeliveryContext);
+
+  // const objForBackend = () => {
+
+  // };
 
   const finalizeOrder = () => {
     setTotalProductsInCart([]);
