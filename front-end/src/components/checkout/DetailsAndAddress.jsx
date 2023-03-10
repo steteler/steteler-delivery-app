@@ -1,13 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import getUser from '../../api/getUser';
 import DeliveryContext from '../../context/DeliveryContext';
 
 export default function DetailsAndAddress() {
   const { detailsAddress, setTotalDetailsAddress } = useContext(DeliveryContext);
+  const [users, setUsers] = useState([]);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setTotalDetailsAddress((prevState) => ({ ...prevState, [name]: value }));
   };
+
+  const getAllUsers = async () => {
+    const allUsers = await getUser();
+    return setUsers(allUsers.data);
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   return (
     <section>
@@ -22,8 +33,11 @@ export default function DetailsAndAddress() {
             data-testid="customer_checkout__select-seller"
             onChange={ (event) => handleChange(event) }
           >
-            <option value="test1">test1</option>
-            <option value="test2">test2</option>
+            { users.filter((u) => u.role === 'seller').map((s, i) => (
+              <option value={ s.name } key={ i }>
+                { s.name }
+              </option>
+            ))}
           </select>
         </label>
         <label htmlFor="address">

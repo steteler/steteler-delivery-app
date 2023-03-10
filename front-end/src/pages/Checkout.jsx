@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import DetailsAndAddress from '../components/checkout/DetailsAndAddress';
 import FinalizeOrder from '../components/checkout/FinalizeOrder';
 import DeliveryContext from '../context/DeliveryContext';
@@ -10,7 +10,7 @@ export default function Checkout() {
   const { totalProductsInCart, setTotalProductsInCart } = useContext(DeliveryContext);
   const { detailsAddress } = useContext(DeliveryContext);
   const [storedValue] = useLocalStorage('user');
-  // const history = useHistory();
+  const navigate = useNavigate();
 
   const total = totalProductsInCart.map((i) => i.totalIten)
     .reduce((acc, currValue) => acc + Number(currValue), 0);
@@ -20,9 +20,8 @@ export default function Checkout() {
 
   const objForBackend = () => {
     const sale = {
-      token: storedValue.token,
       email: storedValue.email,
-      seller: detailsAddress.seller,
+      seller: 'Fulana Pereira',
       address: detailsAddress.address,
       number: detailsAddress.number,
       total,
@@ -33,11 +32,12 @@ export default function Checkout() {
   };
 
   const finalizeOrder = async () => {
-    objForBackend();
-    const idSeller = await postSeller();
-    console.log(idSeller);
+    const obj = objForBackend();
+    const { data } = await postSeller(obj, storedValue.token);
+    console.log(data.message);
     setTotalProductsInCart([]);
-    redirect(`/customer/orders/${idSeller.data.insertedId}`);
+    navigate(`/customer/orders/${data.message}`);
+    // console.log('foi');
   };
 
   return (

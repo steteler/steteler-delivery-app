@@ -5,7 +5,7 @@ import Login from '../pages/Login';
 import Products from '../pages/Customer/Products/Products';
 
 import Orders from '../pages/Customer/Orders/Orders';
-import OrdersDetails from '../pages/Customer/Orders/OrdersDetails';
+// import OrdersDetails from '../pages/Customer/Orders/OrdersDetails';
 
 import Checkout from '../pages/Checkout';
 import Management from '../pages/Admin/Management';
@@ -21,11 +21,8 @@ export default function Routing() {
       <Route path="/customer/orders" element={ <Orders /> } />
 
       <Route path="/customer/checkout" element={ <Checkout /> } />
-      <Route
-        path="/customer/orders/:id"
-        render={ (props) => <OrdersDetails { ...props } /> }
-      />
 
+      <Route path="/customer/orders/:id" element={ <OrdersDetails /> } />
       <Route path="/admin/manage" element={ <Management /> } />
     </Routes>
   );

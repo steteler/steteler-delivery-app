@@ -1,14 +1,13 @@
 import axios from 'axios';
 
-export default async function postSeller(req, token) {
+export default async function getUser(req) {
   const headers = {
     'Access-Control-Allow-Origin': true,
     'Access-Control-Allow-Credentials': true,
-    Authorization: token,
   };
   const { data } = await axios({
-    method: 'post',
-    url: 'http://localhost:3001/customer/orders',
+    method: 'get',
+    url: 'http://localhost:3001/user',
     data: req,
     headers,
   });
