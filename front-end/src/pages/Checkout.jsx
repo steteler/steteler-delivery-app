@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import DetailsAndAddress from '../components/checkout/DetailsAndAddress';
 import FinalizeOrder from '../components/checkout/FinalizeOrder';
 import DeliveryContext from '../context/DeliveryContext';
@@ -10,7 +10,7 @@ export default function Checkout() {
   const { totalProductsInCart, setTotalProductsInCart } = useContext(DeliveryContext);
   const { detailsAddress } = useContext(DeliveryContext);
   const [storedValue] = useLocalStorage('user');
-  const history = useHistory();
+  // const history = useHistory();
 
   const total = totalProductsInCart.map((i) => i.totalIten)
     .reduce((acc, currValue) => acc + Number(currValue), 0);
@@ -37,7 +37,7 @@ export default function Checkout() {
     const idSeller = await postSeller();
     console.log(idSeller);
     setTotalProductsInCart([]);
-    history.push(`/customer/orders/${idSeller.data.insertedId}`);
+    redirect(`/customer/orders/${idSeller.data.insertedId}`);
   };
 
   return (
