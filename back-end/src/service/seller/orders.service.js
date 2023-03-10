@@ -5,6 +5,11 @@ const findAllSalesService = async () => {
   return sales;
 };
 
+const newSaleService = async () => {
+
+};
+
 module.exports = {
   findAllSalesService,
+  newSaleService
 };

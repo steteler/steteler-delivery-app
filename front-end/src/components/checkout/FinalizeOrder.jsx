@@ -10,9 +10,7 @@ export default function FinalizeOrder({ listItens }) {
     .reduce((acc, currValue) => acc + Number(currValue), 0);
 
   const remove = (id) => {
-    // console.log('pain');
     const filterProd = totalProductsInCart.filter((i) => i.id !== id);
-    // console.log(filterProd);
     setTotalProductsInCart(filterProd);
   };
 
