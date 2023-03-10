@@ -3,7 +3,7 @@ const {
   findAllSalesController,
   newSaleController,
 } = require('../../controller/seller/orders.controller');
-const tokenValidator = require('../../middlewares/tokenValidator')
+const tokenValidator = require('../../middlewares/tokenValidator');
 
 const salesRouter = express.Router();
 

@@ -37,7 +37,6 @@ export default function Checkout() {
     console.log(data.message);
     setTotalProductsInCart([]);
     navigate(`/customer/orders/${data.message}`);
-    // console.log('foi');
   };
 
   return (

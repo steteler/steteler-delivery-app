@@ -2,7 +2,6 @@ const {
   findAllSalesService,
   newSaleService,
 } = require('../../service/seller/orders.service');
-const { validateToken } = require('../../helpers/JWTUtils');
 
 const findAllSalesController = async (req, res) => {
   const sales = await findAllSalesService();
@@ -13,7 +12,7 @@ const newSaleController = async (req, res) => {
   console.log('aqui');
   const { email, seller, address, number, total, productsIds, quantity } = req.body;
   const { type, message } = await newSaleService(
-    email, seller, address, number, total, productsIds, quantity
+    email, seller, address, number, total, productsIds, quantity,
   );
   if (type) return res.status(type).json({ message });
 
