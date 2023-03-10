@@ -45,7 +45,7 @@ export default function CardP({ iten }) {
   // };
 
   useEffect(() => {
-    console.log(quantity);
+    // console.log(quantity);
     changeQuant(quantity);
   }, [quantity]);
 
