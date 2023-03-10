@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL(4, 2),
       allowNull: false,
     },
-    url_image: {
+    urlImage: {
       type: DataTypes.STRING(200),
       allowNull: false,
       defaultValue: '',
