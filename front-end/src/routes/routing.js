@@ -10,8 +10,6 @@ import Orders from '../pages/Customer/Orders/Orders';
 import Checkout from '../pages/Checkout';
 import Management from '../pages/Admin/Management';
 import OrdersDetails from '../pages/Orders/OrdersDetails';
-import Orders from '../pages/Customer/Orders/Orders';
-import OrdersDetails from '../pages/Customer/Orders/OrdersDetails';
 
 export default function Routing() {
   return (
