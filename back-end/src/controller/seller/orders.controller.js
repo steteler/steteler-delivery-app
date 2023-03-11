@@ -9,11 +9,7 @@ const findAllSalesController = async (req, res) => {
 };
 
 const newSaleController = async (req, res) => {
-  console.log('aqui');
-  const { email, seller, address, number, total, productsIds, quantity } = req.body;
-  const { type, message } = await newSaleService(
-    email, seller, address, number, total, productsIds, quantity,
-  );
+  const { type, message } = await newSaleService(req.body);
   if (type) return res.status(type).json({ message });
 
   return res.status(201).json({ message });
