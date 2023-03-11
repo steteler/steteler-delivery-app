@@ -13,18 +13,27 @@ const findUser = async (name, email) => {
   return user;
 };
 
-const newRegisterService = async (name, email, password) => {
+const newUser = async (name, email, password) => {
   const user = await findUser(name, email);      
-  // console.log('🚀 ~ file: register.service.js:30 ~ newRegisterService ~ user:', user);
   if (user) {
     return { type: 409, message: 'User already exists' };
   }
-  const newUser = await User.create({ 
+  const addUser = await User.create({ 
     name, email, password: md5Crypt(password), role: 'customer' });
-  // const { id: _i, password: _p, ...userData } = newUser.dataValues;
-  return { type: null, message: newUser };
+  const { id: _i, password: _p, ...userData } = addUser.dataValues;
+  return { type: null, message: userData };
+};
+
+const newUserByAdmin = async (name, email, password, role) => {
+  const user = await findUser(name, email);      
+  if (user) {
+    return { type: 409, message: 'User already exists' };
+  }
+  await User.create({ name, email, password: md5Crypt(password), role });
+  return { type: null, message: 'Success' };
 };
   
 module.exports = {
-  newRegisterService,
+  newUser,
+  newUserByAdmin,
 };

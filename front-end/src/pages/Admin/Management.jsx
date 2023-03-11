@@ -1,29 +1,25 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
-import postRegister from '../api/postRegister';
-import useLocalStorage from '../hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import postAdminRegister from '../../api/postAdminRegister';
+import Navbar from '../../components/common/Navbar/Navbar';
 
-export default function Register() {
+export default function Management() {
   const [register, setRegister] = useState({
     name: '',
     email: '',
     password: '',
+    role: 'customer',
   });
-
-  const [storedValue, setValue] = useLocalStorage('user');
-
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
+  const [storedValue] = useLocalStorage('user');
 
-  const { mutate } = useMutation(postRegister, {
+  const { mutate } = useMutation(postAdminRegister, {
     onSuccess: ({ data }) => {
       setValue(data);
-      navigate('/customer/products');
     },
     onError: () => {
       setError(true);
-      console.warn(storedValue);
     },
   });
 
@@ -42,11 +38,17 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate(register);
+    const { token } = storedValue;
+    mutate({ register, token });
   };
-
   return (
     <section>
+      <Navbar />
+      { error && (
+        <div data-testid="admin_manage__element-invalid-register">
+          ERRO
+        </div>
+      )}
       <form onSubmit={ (e) => handleSubmit(e) }>
         <label htmlFor="name">
           Nome
@@ -55,7 +57,7 @@ export default function Register() {
             name="name"
             id="input_name"
             required
-            data-testid="common_register__input-name"
+            data-testid="admin_manage__input-name"
             onChange={ handleChange }
           />
         </label>
@@ -66,7 +68,7 @@ export default function Register() {
             name="email"
             id="input_email"
             required
-            data-testid="common_register__input-email"
+            data-testid="admin_manage__input-email"
             onChange={ handleChange }
           />
         </label>
@@ -76,22 +78,30 @@ export default function Register() {
             type="password"
             name="password"
             id="input_password"
-            data-testid="common_register__input-password"
+            data-testid="admin_manage__input-password"
             onChange={ handleChange }
           />
+        </label>
+        <label htmlFor="role-input">
+          Tipo
+          <select
+            data-testid="admin_manage__select-role"
+            name="role"
+            id="role-input"
+            onChange={ handleChange }
+          >
+            <option value="seller">Vendedor</option>
+            <option value="administrator">Administrador</option>
+            <option value="customer">Cliente</option>
+          </select>
         </label>
         <button
           type="submit"
           disabled={ !inputValidator() }
-          data-testid="common_register__button-register"
+          data-testid="admin_manage__button-register"
         >
           CADASTRAR
         </button>
-        { error && (
-          <div data-testid="common_register__element-invalid_register">
-            Usuário já existente
-          </div>
-        )}
       </form>
     </section>
   );
