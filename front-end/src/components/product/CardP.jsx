@@ -11,7 +11,7 @@ export default function CardP({ iten }) {
       id: iten.id,
       name: iten.name,
       price: iten.price,
-      url_image: iten.url_image,
+      urlImage: iten.urlImage,
       quantity: Number(q),
       totalIten: (Number(iten.price) * q).toFixed(2),
     };
@@ -22,30 +22,7 @@ export default function CardP({ iten }) {
     }
   };
 
-  // const changeManual = (value) => {
-  //   if (value === 0) {
-  //     const itens = [...totalProductsInCart];
-  //     delete itens[iten.id];
-  //     return setTotalProductsInCart(itens);
-  //   }
-  //   const updatedItem = {
-  //     id: iten.id,
-  //     name: iten.name,
-  //     price: iten.price,
-  //     url_image: iten.url_image,
-  //     quantity: Number(value),
-  //     totalIten: (Number(iten.price) * Number(value)).toFixed(2),
-  //   };
-  //   const filterProducts = totalProductsInCart.filter((p) => iten.id !== p.id);
-  //   const updatedItems = [
-  //     ...filterProducts,
-  //     updatedItem,
-  //   ];
-  //   setTotalProductsInCart(updatedItems);
-  // };
-
   useEffect(() => {
-    console.log(quantity);
     changeQuant(quantity);
   }, [quantity]);
 
@@ -72,7 +49,7 @@ export default function CardP({ iten }) {
         {`R$ ${iten.price.replace(/\./, ',')}`}
       </div>
       <img
-        src={ iten.url_image }
+        src={ iten.urlImage }
         alt={ `Imagem de ${iten.name}` }
         data-testid={ `customer_products__img-card-bg-image-${iten.id}` }
         width="80px"
@@ -108,6 +85,6 @@ CardP.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.string,
-    url_image: PropTypes.string,
+    urlImage: PropTypes.string,
   }).isRequired,
 };

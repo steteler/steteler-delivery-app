@@ -5,7 +5,8 @@ const tokenValidator = (req, res, next) => {
   if (!token) return res.status(401).json({ message: 'Token not found' });
   try {
     const { data: { role } } = validateToken(token);
-    if (role !== 'administrator') return res.status(401).json({ message: 'Unauthorized' });
+    // if (role !== 'administrator') return res.status(401).json({ message: 'Unauthorized' });
+    console.log(role);
     next();
   } catch (err) {
    return res.status(401).json({ message: 'Expired or invalid token' });
