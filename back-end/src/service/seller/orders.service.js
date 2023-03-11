@@ -21,26 +21,24 @@ const findByName = async (name, role) => {
   return seller;
 };
 
-const newSaleService = async (
-  email,
-  seller,
-  address,
-  number,
-  total,
-  productsIds,
-  quantity
-) => {
+const newSaleProducts = async (saleId, productsIds, quantity) => {
+  const newProds = await Promise.all(
+    productsIds.map(async (pId, i) => {
+      const prod = await SaleProduct.create({
+        saleId,
+        productId: pId,
+        quantity: quantity[i],
+      });
+      return prod;
+    }),
+  );
+  if (!newProds) return { type: 500, message: 'Error inserting products' };
+};
+
+const newSaleService = async (saleData) => {
+  const { email, seller, address, number, total, productsIds, quantity } = saleData;
   const userByEmail = await findByEmail(email);
   const sellerByName = await findByName(seller, 'seller');
-  // const objSale = {
-  //   user_id: userByEmail.id,
-  //   seller_id: sellerByName.id,
-  //   total_price: total,
-  //   delivery_address: address,
-  //   delivery_number: number,
-  //   sale_date: Date.now(),
-  //   status: 'Pendente',
-  // };
   const newSale = await Sale.create({
     userId: userByEmail.id,
     sellerId: sellerByName.id,
@@ -50,15 +48,7 @@ const newSaleService = async (
     saleDate: Date.now(),
     status: 'Pendente',
   });
-  const newSaleProduct = productsIds.map(async (pId, i) => {
-    await SaleProduct.create({
-      sale_id: newSale.id,
-      product_id: pId,
-      quantity: quantity[i],
-    });
-  });
-
-  if (!newSaleProduct) return null;
+  await newSaleProducts(newSale.id, productsIds, quantity);
   return { type: null, message: newSale.id };
 };
 
