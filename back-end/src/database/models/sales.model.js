@@ -40,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Sale.associate = ({ User }) => {
-    Sale.belongsTo(User, { foreignKey: 'user_id' });
-    Sale.belongsTo(User, { foreignKey: 'seller_id' });
+    Sale.belongsTo(User, { foreignKey: 'userId' });
+    Sale.belongsTo(User, { foreignKey: 'sellerId' });
   }
 
   return Sale;
