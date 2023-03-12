@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function CardOrders({ iten }) {
+export default function SellerOrderCard({ iten }) {
   return (
     <div key={ iten.id }>
       <Link to={ `/seller/orders/${iten.id}` }>
@@ -28,7 +28,7 @@ export default function CardOrders({ iten }) {
   );
 }
 
-CardOrders.propTypes = {
+SellerOrderCard.propTypes = {
   iten: PropTypes.shape({
     id: PropTypes.number,
     totalPrice: PropTypes.string,

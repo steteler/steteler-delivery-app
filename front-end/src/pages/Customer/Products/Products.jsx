@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import getProducts from '../../../api/getProducts';
-import ProductCard from '../../../components/product/ProductCard';
+import ProductCard from '../../../components/Customer/ProductCard';
 import DeliveryContext from '../../../context/DeliveryContext';
 import Navbar from '../../../components/common/Navbar/Navbar';
 

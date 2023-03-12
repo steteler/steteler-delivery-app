@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CardOrders from './CardOrders';
+import SellerOrderCard from './SellerOrderCard';
 
-export default function OrdersCard({ orders }) {
+export default function SellerOrdersCard({ orders }) {
   const mapItens = orders.map((it, i) => (
-    <CardOrders key={ i } iten={ it } />
+    <SellerOrderCard key={ i } iten={ it } />
   ));
   return (
     <section>
@@ -12,7 +12,7 @@ export default function OrdersCard({ orders }) {
     </section>
   );
 }
-OrdersCard.propTypes = {
+SellerOrdersCard.propTypes = {
   orders: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     total_price: PropTypes.number,

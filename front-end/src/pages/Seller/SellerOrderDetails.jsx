@@ -1,4 +1,4 @@
-export default function OrdersDetails() {
+export default function SellerOrderDetails() {
   return (
     <div>
       <h1>detalhe do pedido</h1>

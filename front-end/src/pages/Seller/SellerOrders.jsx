@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import getOrders from '../../api/Seller/getOrders';
-import OrdersCard from '../../components/Seller/OrdersCard';
+import SellerOrdersCard from '../../components/Seller/SellerOrdersCard';
 // import Navbar from '../../components/common/Navbar/Navbar';
 
-export default function Orders() {
+export default function SellerOrders() {
   const [orders, setOrders] = useState([]);
 
   const getAllOrders = async () => {
@@ -19,7 +19,7 @@ export default function Orders() {
   return (
     <div>
       {/* <Navbar /> */}
-      <OrdersCard orders={ orders } />
+      <SellerOrdersCard orders={ orders } />
       <h1>Página do vendedor</h1>
       <button type="button" onClick={ () => getAllOrders() }>clique</button>
       <button type="button" onClick={ () => console.log(orders) }>orders</button>

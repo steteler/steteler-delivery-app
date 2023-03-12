@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-export default function OrdersDetails() {
+export default function CustomerOrderDetails() {
   const { id } = useParams();
   return (
     <div>
