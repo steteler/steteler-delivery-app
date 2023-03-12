@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import postLogin from '../api/postLogin';
@@ -19,7 +19,6 @@ export default function Login() {
       navigate('/seller/orders');
       break;
     case 'customer':
-      // console.log('CUSTOMER');
       navigate('/customer/products');
       break;
 
@@ -27,6 +26,10 @@ export default function Login() {
       break;
     }
   };
+
+  useEffect(() => {
+    if (storedValue) handleRedirect(storedValue.role);
+  });
 
   const { mutate } = useMutation(postLogin, {
     onSuccess: ({ data }) => {
