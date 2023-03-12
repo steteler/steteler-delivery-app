@@ -3,8 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Products from '../pages/Customer/Products/Products';
-
-// import Orders from '../pages/Customer/Orders/Orders';
 import Checkout from '../pages/Checkout';
 import Management from '../pages/Admin/Management';
 import Orders from '../pages/Seller/Orders';
@@ -15,19 +13,23 @@ import CustomerOrders from '../pages/Customer/Orders/CustomerOrders';
 export default function Routing() {
   return (
     <Routes>
+      {/* //*MAIN */}
       <Route path="*" element={ <Navigate to="login" replace /> } />
       <Route path="/login" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
+
+      {/* //*CUSTOMER */}
       <Route path="/customer/products" element={ <Products /> } />
       <Route path="/customer/orders" element={ <CustomerOrders /> } />
-      <Route path="/customer/checkout" element={ <Checkout /> } />
       <Route path="/customer/orders/:id" element={ <OrdersDetails /> } />
-      <Route path="/admin/manage" element={ <Management /> } />
+      <Route path="/customer/checkout" element={ <Checkout /> } />
+
+      {/* //*SELLER */}
       <Route path="/seller/orders" element={ <Orders /> } />
-      <Route
-        path="/seller/orders/:id"
-        render={ (props) => <OrderDetails { ...props } /> }
-      />
+      <Route path="/seller/orders/:id" element={ <OrderDetails /> } />
+
+      {/* //*ADMIN */}
+      <Route path="/admin/manage" element={ <Management /> } />
     </Routes>
   );
 }
