@@ -13,7 +13,7 @@ const findSaleByUserId = async (req, res) => {
   const { id } = req.params;
   const sale = await getSaleByUserId(id);
   return res.status(200).json(sale);
-}
+};
 
 const newSaleController = async (req, res) => {
   const { type, message } = await newSaleService(req.body);

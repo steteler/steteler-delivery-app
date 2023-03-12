@@ -53,10 +53,10 @@ const newSaleService = async (saleData) => {
 };
 
 const getSaleByUserId = async (userId) => {
-  const sale = await Sale.findAll({ where: { userId: userId } });
+  const sale = await Sale.findAll({ where: { userId } });
   if (!sale) return { type: 404, message: 'Sale not found' };
   return sale;
-}
+};
 
 module.exports = {
   findAllSalesService,
