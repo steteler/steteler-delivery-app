@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import getOrders from '../../api/Seller/getOrders';
 import OrdersCard from '../../components/Seller/OrdersCard';
 // import Navbar from '../../components/common/Navbar/Navbar';
-// import OrdersCard from '../../components/Seller/OrdersCard';
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);

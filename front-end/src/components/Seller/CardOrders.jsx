@@ -12,16 +12,16 @@ export default function CardOrders({ iten }) {
           { iten.status }
         </div>
         <div data-testid={ `seller_orders__element-order-date-${iten.id}` }>
-          { iten.sale_date }
+          { iten.saleDate }
         </div>
         <div data-testid={ `seller_orders__element-card-price-${iten.id}` }>
-          {`R$ ${iten.total_price.replace('.', ',')}` }
+          {`R$ ${iten.totalPrice.replace('.', ',')}` }
         </div>
         <div data-testid={ `seller_orders__element-card-address-${iten.id}` }>
-          { iten.delivery_address }
+          { iten.deliveryAddress }
           ,
           {' '}
-          { iten.delivery_number }
+          { iten.deliveryNumber }
         </div>
       </Link>
     </div>
@@ -31,10 +31,10 @@ export default function CardOrders({ iten }) {
 CardOrders.propTypes = {
   iten: PropTypes.shape({
     id: PropTypes.number,
-    total_price: PropTypes.number,
-    delivery_address: PropTypes.string,
-    delivery_number: PropTypes.string,
-    sale_date: PropTypes.instanceOf(Date),
+    totalPrice: PropTypes.string,
+    deliveryAddress: PropTypes.string,
+    deliveryNumber: PropTypes.string,
+    saleDate: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
 };
