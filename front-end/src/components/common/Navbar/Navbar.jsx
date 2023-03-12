@@ -7,7 +7,7 @@ import './Navbar.css';
 export default function Navbar() {
   const navigate = useNavigate();
   const [storedValue] = useLocalStorage('user');
-  console.log(storedValue.name);
+  // console.log(storedValue.name);
 
   const btnHandler = () => {
     localStorage.clear();
