@@ -20,7 +20,7 @@ async function login(email, password) {
 
   if (incomingPasswd !== userPasswd) return { type: 404, message: 'Incorrect password' };
 
-  const { id: _i, password: _p, ...userData } = getUser.dataValues;
+  const { password: _p, ...userData } = getUser.dataValues;
   return { type: null, message: userData };
 }
 
