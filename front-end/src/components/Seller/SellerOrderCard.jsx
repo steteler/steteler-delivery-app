@@ -8,11 +8,11 @@ export default function SellerOrderCard({ iten }) {
         <div data-testid={ `seller_orders__element-order-id-${iten.id}` }>
           { iten.id }
         </div>
-        <div data-testid={ `seller_orders_element-delivery-status-${iten.id}` }>
+        <div data-testid={ `seller_orders__element-delivery-status-${iten.id}` }>
           { iten.status }
         </div>
         <div data-testid={ `seller_orders__element-order-date-${iten.id}` }>
-          { iten.saleDate }
+          { new Date(iten.saleDate).toLocaleDateString('pt-br') }
         </div>
         <div data-testid={ `seller_orders__element-card-price-${iten.id}` }>
           {`R$ ${iten.totalPrice.replace('.', ',')}` }
