@@ -8,7 +8,7 @@ export default async function postSeller(req, token) {
   };
   const { data } = await axios({
     method: 'post',
-    url: 'http://localhost:3001/customer/orders',
+    url: 'http://localhost:3001/customer/allOrders',
     data: req,
     headers,
   });
