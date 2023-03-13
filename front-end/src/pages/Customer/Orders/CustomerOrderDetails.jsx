@@ -13,95 +13,108 @@ export default function CustomerOrderDetails() {
     data: details,
   } = useQuery('saleDetails', () => getSellerId(id));
 
+  // const test = ()
+
   return (
     <section>
       <Navbar />
-      <p>{ details.totalPrice }</p>
-      <p>Detalhes do Pedido</p>
-      <p
-        data-testid="customer_order_details__element-order-details-label-order-id"
-      >
-        { `PEDIDO 000${id}` }
-      </p>
-      <p
-        data-testid="customer_order_details__element-order-details-label-seller-name"
-      >
-        P. Vend: Fulana Pereira
-      </p>
-      <p
-        data-testid="customer_order_details__element-order-details-label-order-date"
-      >
-        { `Date ${details.saleDate}` }
-      </p>
-      <p
-        data-testid={
-          `customer_order_details__element-order-details-label-delivery-status${id}`
-        }
-      >
-        { `Status ${details.status}` }
-      </p>
-      <button
-        type="button"
-        data-testid="customer_order_details__button-delivery-check"
-      >
-        MARCAR COMO ENTREGUE
-      </button>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Subtotal</th>
-            <th>Remover Item</th>
-          </tr>
-        </thead>
-        <tbody>
-          { isSuccess && details.Products.map((item, i) => {
-            const { id: itemId, name, quantity, price, totalIten } = item;
-            return (
-              <tr key={ itemId }>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-item-number-${i}`
-                  }
-                >
-                  { i + 1 }
-                </td>
-                <td
-                  data-testid={ `customer_order_details__element-order-table-name-${i}` }
-                >
-                  { name }
-                </td>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-quantity-${i}`
-                  }
-                >
-                  { quantity }
-
-                </td>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-unit-price-${i}`
-                  }
-                >
-                  { price.replace('.', ',') }
-                </td>
-                <td
-                  data-testid={
-                    `customer_order_details__element-order-table-sub-total-${i}`
-                  }
-                >
-                  {totalIten.replace('.', ',')}
-                </td>
+      { isSuccess && (
+        <div>
+          <p>Detalhes do Pedido</p>
+          <p
+            data-testid="customer_order_details__element-order-details-label-order-id"
+          >
+            { `PEDIDO 000${id}` }
+          </p>
+          <p
+            data-testid="customer_order_details__element-order-details-label-seller-name"
+          >
+            P. Vend: Fulana Pereira
+          </p>
+          <p
+            data-testid="customer_order_details__element-order-details-label-order-date"
+          >
+            { `Date ${new Date(details.saleDate).toLocaleDateString('pt-br')}` }
+          </p>
+          <p
+            data-testid={
+              `customer_order_details__element-order-details-label-delivery-status${id}`
+            }
+          >
+            { `Status ${details.status}` }
+          </p>
+          <button
+            type="button"
+            data-testid="customer_order_details__button-delivery-check"
+            disabled
+          >
+            MARCAR COMO ENTREGUE
+          </button>
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Valor Unitário</th>
+                <th>Subtotal</th>
               </tr>
-            );
-          }) }
-        </tbody>
-      </table>
-      <p>{ `Total: R$ ${details.totalPrice}` }</p>
+            </thead>
+            <tbody>
+              { details.Products.map((item, i) => {
+                const { id: itemId, name, SaleProduct, price } = item;
+                const subTotal = SaleProduct.quantity * Number(price);
+                console.log(typeof subTotal);
+                return (
+                  <tr key={ itemId }>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-item-number-${i}`
+                      }
+                    >
+                      { i + 1 }
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-name-${i}`
+                      }
+                    >
+                      { name }
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-quantity-${i}`
+                      }
+                    >
+                      { SaleProduct.quantity }
+
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-unit-price-${i}`
+                      }
+                    >
+                      { price.replace('.', ',') }
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_order_details__element-order-table-sub-total-${i}`
+                      }
+                    >
+                      { String(subTotal.toFixed(2)).replace('.', ',') }
+                    </td>
+                  </tr>
+                );
+              }) }
+            </tbody>
+          </table>
+          <p
+            data-testid="customer_order_details__element-order-total-price"
+          >
+            { `Total: R$ ${details.totalPrice.replace('.', ',')}` }
+          </p>
+        </div>
+      ) }
     </section>
   );
 }
