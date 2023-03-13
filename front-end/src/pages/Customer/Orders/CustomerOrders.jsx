@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import getUserSales from '../../../api/getUserSales';
 import CustomerOrderCard from '../../../components/Customer/CustomerOrderCard';
+import Navbar from '../../../components/common/Navbar/Navbar';
 
 export default function CustomerOrders() {
   const [storedValue] = useLocalStorage('user');
@@ -15,6 +16,7 @@ export default function CustomerOrders() {
     <div>
       <h1>Customer Orders</h1>
       <section>
+        <Navbar />
         { isSuccess && userOrders.map((it, i) => (
           <CustomerOrderCard key={ i } order={ it } />
         ))}
