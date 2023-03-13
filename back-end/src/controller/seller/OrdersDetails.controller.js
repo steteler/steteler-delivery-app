@@ -1,4 +1,4 @@
-const { findSaleByPk} = require('../../service/seller/OrdersDetails.service');
+const { findSaleByPk } = require('../../service/seller/OrdersDetails.service');
 
 const findSalesByPk = async (req, res) => {
   const { id } = req.params;

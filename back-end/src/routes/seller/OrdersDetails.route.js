@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  findSalesByPk
+  findSalesByPk,
 } = require('../../controller/seller/OrdersDetails.controller');
 
 const salesDetailsRouter = express.Router();
