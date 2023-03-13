@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DetailsAndAddress from '../components/checkout/DetailsAndAddress';
-import FinalizeOrder from '../components/checkout/FinalizeOrder';
-import DeliveryContext from '../context/DeliveryContext';
-import useLocalStorage from '../hooks/useLocalStorage';
-import postSeller from '../api/postSeller';
+import DetailsAndAddress from '../../components/checkout/DetailsAndAddress';
+import FinalizeOrder from '../../components/checkout/FinalizeOrder';
+import DeliveryContext from '../../context/DeliveryContext';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import postSeller from '../../api/postSeller';
+import Navbar from '../../components/common/Navbar/Navbar';
 
 export default function Checkout() {
   const { totalProductsInCart, setTotalProductsInCart } = useContext(DeliveryContext);
@@ -41,6 +42,7 @@ export default function Checkout() {
 
   return (
     <section>
+      <Navbar />
       <FinalizeOrder listItens={ totalProductsInCart } />
       <DetailsAndAddress />
       <button
